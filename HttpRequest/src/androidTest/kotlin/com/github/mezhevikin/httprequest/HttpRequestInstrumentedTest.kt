@@ -24,15 +24,15 @@ class HttpRequestInstrumentedTest {
                 "User-Agent" to "HttpRequest"
             )
         )
-        request.json<HttpBin> { json, response ->
+        request.json<HttpBin> { result, response ->
             assertNotNull(response.body)
             assertNull(response.exception)
-            assertNotNull(json)
+            assertNotNull(result)
             assertEquals(200, response.connection?.responseCode)
             assertTrue(response.success)
-            assertEquals(json?.args?.get("firstName"), "Alexey")
-            assertEquals(json?.args?.get("lastName"), "Mezhevikin")
-            assertEquals(json?.headers?.get("User-Agent"), "HttpRequest")
+            assertEquals(result?.args?.get("firstName"), "Alexey")
+            assertEquals(result?.args?.get("lastName"), "Mezhevikin")
+            assertEquals(result?.headers?.get("User-Agent"), "HttpRequest")
             latch.countDown()
         }
         latch.await()
@@ -51,15 +51,15 @@ class HttpRequestInstrumentedTest {
                 "User-Agent" to "HttpRequest"
             )
         )
-        request.json<HttpBin> { json, response ->
+        request.json<HttpBin> { result, response ->
             assertNotNull(response.body)
             assertNull(response.exception)
-            assertNotNull(json)
+            assertNotNull(result)
             assertEquals(200, response.connection?.responseCode)
             assertTrue(response.success)
-            assertEquals(json?.form?.get("firstName"), "Alexey")
-            assertEquals(json?.form?.get("lastName"), "Mezhevikin")
-            assertEquals(json?.headers?.get("User-Agent"), "HttpRequest")
+            assertEquals(result?.form?.get("firstName"), "Alexey")
+            assertEquals(result?.form?.get("lastName"), "Mezhevikin")
+            assertEquals(result?.headers?.get("User-Agent"), "HttpRequest")
             latch.countDown()
         }
         latch.await()
@@ -103,10 +103,10 @@ class HttpRequestInstrumentedTest {
     @Test fun testJsonError() {
         val latch = CountDownLatch(1)
         val request = HttpRequest("https://httpbin.org/get")
-        request.json = Json { ignoreUnknownKeys = false }
-        request.json<HttpBin> { json, response ->
+        val decoder = Json { ignoreUnknownKeys = false }
+        request.json<HttpBin>(decoder) { result, response ->
             assertNotNull(response.exception)
-            assertNull(json)
+            assertNull(result)
             latch.countDown()
         }
         latch.await()
