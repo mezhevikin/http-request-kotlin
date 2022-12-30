@@ -9,8 +9,8 @@ val request = HttpRequest(
     url = "https://httpbin.org/get",
     parameters = mapOf("name" to "Alex")
 )
-request.json<HttpBin> { json, response ->
-    println(json)
+request.json<HttpBin> { result, response ->
+    println(result)
 }
 ```
 
@@ -23,10 +23,10 @@ val request = HttpRequest(
     parameters = mapOf("name" to "Alex"),
     headers = mapOf("User-Agent" to "HttpRequest")
 )
-request.json<HttpBin> { json, response ->
+request.json<HttpBin> { result, response ->
     println(response.exception)
     println(response.success)
-    println(json)
+    println(result)
 }
 ```
 
@@ -51,8 +51,8 @@ HttpRequest uses `Kotlinx Serialization` for Json.
 )
 
 val request = HttpRequest("https://httpbin.org/get")
-request.json<HttpBin> { json, response ->
-    println(json)
+request.json<HttpBin> { result, response ->
+    println(result)
 }
 ```
 
@@ -61,8 +61,8 @@ Custom decoder
 ```kotlin
 val request = HttpRequest("https://httpbin.org/get")
 val decoder = Json { ignoreUnknownKeys = false }
-request.json<HttpBin>(decoder) { json, response ->
-    println(json)
+request.json<HttpBin>(decoder) { result, response ->
+    println(result)
 }
 ```
 
