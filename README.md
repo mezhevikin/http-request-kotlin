@@ -7,7 +7,7 @@ A tiny http client for Kotlin/Android. Only [90 lines](HttpRequest/src/main/kotl
 ```kotlin
 val request = HttpRequest(
     url = "https://httpbin.org/get",
-    parameters = mapOf("name" to "Alex"),
+    parameters = mapOf("name" to "Alex")
 )
 request.json<HttpBin> { json, response ->
     println(json)
