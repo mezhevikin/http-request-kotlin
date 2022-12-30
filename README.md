@@ -24,7 +24,7 @@ val request = HttpRequest(
     headers = mapOf("User-Agent" to "HttpRequest")
 )
 request.json<HttpBin> { json, response ->
-    println(response.error)
+    println(response.exception)
     println(response.success)
     println(json)
 }
