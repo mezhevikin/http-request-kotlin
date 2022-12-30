@@ -59,10 +59,8 @@ request.json<HttpBin> { result, response ->
 Custom decoder
 
 ```kotlin
-val request = HttpRequest("https://httpbin.org/get")
-val decoder = Json { ignoreUnknownKeys = false }
-request.json<HttpBin>(decoder) { result, response ->
-    println(result)
+HttpRequest.json = Json {
+    ignoreUnknownKeys = false
 }
 ```
 

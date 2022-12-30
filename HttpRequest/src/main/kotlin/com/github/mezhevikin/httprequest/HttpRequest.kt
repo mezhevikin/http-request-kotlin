@@ -52,13 +52,16 @@ class HttpRequest(
         }
     }
 
+    companion object {
+        var json = Json { ignoreUnknownKeys = true }
+    }
+
     inline fun <reified T> json(
-        decoder: Json = Json { ignoreUnknownKeys = true },
         crossinline completion: (T?, HttpResponse) -> Unit) where T : Any {
         response { response ->
             try {
                 val body = response.body
-                val result = if (body != null) decoder.decodeFromString<T>(body) else null
+                val result = if (body != null) json.decodeFromString<T>(body) else null
                 completion(result, response)
             } catch (e: Exception) {
                 response.exception = e

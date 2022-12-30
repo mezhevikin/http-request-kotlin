@@ -102,11 +102,12 @@ class HttpRequestInstrumentedTest {
 
     @Test fun testJsonError() {
         val latch = CountDownLatch(1)
+        HttpRequest.json = Json { ignoreUnknownKeys = false }
         val request = HttpRequest("https://httpbin.org/get")
-        val decoder = Json { ignoreUnknownKeys = false }
-        request.json<HttpBin>(decoder) { result, response ->
+        request.json<HttpBin> { result, response ->
             assertNotNull(response.exception)
             assertNull(result)
+            HttpRequest.json = Json { ignoreUnknownKeys = true }
             latch.countDown()
         }
         latch.await()
