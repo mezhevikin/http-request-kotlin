@@ -56,8 +56,7 @@ class HttpRequest(
         var json = Json { ignoreUnknownKeys = true }
     }
 
-    inline fun <reified T> json(
-        crossinline completion: (T?, HttpResponse) -> Unit) where T : Any {
+    inline fun <reified T> json(crossinline completion: (T?, HttpResponse) -> Unit) where T : Any {
         response { response ->
             try {
                 val body = response.body
