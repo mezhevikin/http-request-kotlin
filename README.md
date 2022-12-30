@@ -1,6 +1,6 @@
 # HttpRequest
 
-A tiny http client for Kotlin/Android. Only [90 lines](HttpRequest/src/main/kotlin/com/github/mezhevikin/httprequest/HttpRequest.kt) of code. This is wrappe around native HttpURLConnection.
+A tiny http client for Kotlin/Android. Only [90 lines](HttpRequest/src/main/kotlin/com/github/mezhevikin/httprequest/HttpRequest.kt) of code. This is wrapper around native HttpURLConnection.
 
 ### Get
 
@@ -41,7 +41,7 @@ val request = HttpRequest("https://httpbin.org/get", config = {
 
 ### Json
 
-HttpRequest use `Kotlinx Serialization` for Json.
+HttpRequest uses `Kotlinx Serialization` for Json.
 
 ```kotlin
 @Serializable data class HttpBin(
