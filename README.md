@@ -99,7 +99,7 @@ repositories {
 2. Add dependencies
 
 ```
-implementation 'com.github.mezhevikin:http-request-kotlin:0.0.4'
+implementation 'com.github.mezhevikin:http-request-kotlin:0.0.5'
 implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
 ```
 

@@ -43,6 +43,7 @@ class HttpRequest(
                         reader.readText()
                     }
                 }
+                connection.disconnect()
                 completion(response)
             } catch (e: Exception) {
                 val response = HttpResponse()
